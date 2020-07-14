@@ -4,3 +4,6 @@
 
 - include: ssh.yml
 
+- name: /win-phoronix/ shutdown system
+  win_shell: shutdown /s /f
+  when: "phoronix_shutdown is defined and phoronix_shutdown"
