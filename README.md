@@ -32,7 +32,7 @@ tar xaf MSEdge-Win10.tar
 qemu-img convert "MSEdge - Win10-disk001.vmdk" -O qcow2 -S 4k -c MSEdge-Win10-disk001.qcow2
 
 # Start under KVM with port redirection
-qemu-system-x86_64 -enable-kvm -smp cpus=2 -m 2048M -net nic -net user,hostfwd=tcp::5985-:5985  /var/lib/kvm/MSEdge-Win10-disk001.working.qcow2
+qemu-system-x86_64 -enable-kvm -smp cpus=2 -m 2048M -net nic -net user,hostfwd=tcp::5985-:5985,hostfwd=tcp::8022-:22  MSEdge-Win10-disk001.qcow2
 ```
 
 ### Ubuntu Focal Packages

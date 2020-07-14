@@ -87,3 +87,36 @@
     name: virtio-drivers
     state: present
 
+- name: /win-phoronix/ open ssh server port
+  win_firewall_rule:
+    name: Win32-OpenSSH inbound
+    protocol: tcp
+    localport: 22
+    direction: in
+    action: allow
+    state: present
+    enabled: true
+    profiles: public,private
+
+- name: /win-phoronix/ start sshd
+  win_service:
+    name: sshd
+    state: started
+    start_mode: auto
+    force: true
+    force_dependent_services: true
+
+- name: /win-phoronix/ copy authorized_keys
+  win_copy:
+    dest: '{{ ansible_env.ALLUSERSPROFILE}}/ssh/administrators_authorized_keys'
+    src: phoronix.pub
+
+- name: /win-phoronix/ fix authorized_keys permissions
+  script: set-authorized-keys-acl.ps1
+
+- name: /win-phoronix/ use powershell for ssh
+  win_regedit:
+    path: HKLM:\SOFTWARE\OpenSSH
+    name: DefaultShell
+    data: 'C:\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
+    type: string
