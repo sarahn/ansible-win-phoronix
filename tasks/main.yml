@@ -58,7 +58,7 @@
 
 - name: /win-phoronix/ check for phoronix config
   win_stat:
-    path: "{{ ansible_env.HOMEPATH }}\\.phoronix-test-suite\\user-config.xml"
+    path: "{{ ansible_env.USERPROFILE }}\\.phoronix-test-suite\\user-config.xml"
   register: phoronix_info
 
 - name: /win-phoronix/ initialize phoronix
@@ -66,17 +66,17 @@
     Start-Process
     -FilePath {{ ansible_env.SystemDrive }}\\phoronix-test-suite\\phoronix-test-suite.bat
     -ArgumentList help; sleep 10
-  failed_when: False
+  failed_when: false
   when: not phoronix_info.stat.exists
 
 - name: /win-phoronix/ copy config file
   win_copy:
-    dest: "{{ ansible_env.HOMEPATH }}\\.phoronix-test-suite\\user-config.xml"
+    dest: "{{ ansible_env.USERPROFILE }}\\.phoronix-test-suite\\user-config.xml"
     src: user-config.xml
 
 - name: /win-phoronix/ copy core file
   win_copy:
-    dest: "{{ ansible_env.HOMEPATH }}\\.phoronix-test-suite\\core.pt2so"
+    dest: "{{ ansible_env.USERPROFILE }}\\.phoronix-test-suite\\core.pt2so"
     src: core.pt2so
 
 - name: /win-phoronix/ test phoronix
