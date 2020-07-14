@@ -24,6 +24,12 @@
     state: present
     params:  "/InstallDir:{{ ansible_env.SystemDrive }}\\PHP"
 
+- name: /win-phoronix/ enable php openssl
+  win_lineinfile:
+    line: 'extension=openssl'
+    path: "{{ ansible_env.SystemDrive }}\\PHP\\php.ini"
+    regex: ';extension=openssl'
+
 - name: /win-phoronix/ install cygwin
   win_chocolatey:
     name: cygwin
