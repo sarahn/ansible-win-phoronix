@@ -79,6 +79,11 @@
     dest: "{{ ansible_env.USERPROFILE }}\\.phoronix-test-suite\\core.pt2so"
     src: core.pt2so
 
+- name: /win-phoronix/ create suite directory
+  win_file:
+    path: "{{ ansible_env.USERPROFILE }}\\.phoronix-test-suite\\test-suites\\local\\suite"
+    state: directory
+
 - name: /win-phoronix/ test phoronix
   win_shell: "{{ ansible_env.SystemDrive }}\\phoronix-test-suite\\phoronix-test-suite.bat help"
 
