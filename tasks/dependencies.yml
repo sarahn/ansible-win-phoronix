@@ -25,6 +25,8 @@
     state: present
     params:  "/InstallDir:{{ ansible_env.SystemDrive }}\\cygwin64"
 
+# TODO this doesn't actually work
+# look at https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.185-1/virtio-win-gt-x64.msi instead
 - name: /win-phoronix/ install virtio drivers
   win_chocolatey:
     name: virtio-drivers
