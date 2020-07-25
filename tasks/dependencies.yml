@@ -17,7 +17,7 @@
   win_lineinfile:
     line: 'extension=openssl'
     path: "{{ ansible_env.SystemDrive }}\\PHP\\php.ini"
-    regex: ';extension=openssl'
+    regex: ';?extension=openssl'
 
 - name: /win-phoronix/ install cygwin
   win_chocolatey:
