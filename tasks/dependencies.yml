@@ -39,3 +39,6 @@
 
 - include: virtio.yml
   tags: virtio
+
+- include: xen.yml
+  tags: xen

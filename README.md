@@ -16,6 +16,7 @@ This is a role for installing phoronix under windows.
 ## Tags
 
   * virtio
+  * xen
 
 ## End to End setup
 
