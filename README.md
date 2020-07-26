@@ -51,16 +51,3 @@ qemu-system-x86_64 -enable-kvm -smp cpus=2 -m 2048M -net nic -net user,hostfwd=t
   * Click on "network and internet settings"
   * Click on "change connection properties"
   * Select "private" not "public"
-
-Possible automation methods:
-
-  * Edit existing network registry setting to point to KVM adapter using
-    reged from package chntpw
-  * Edit the registry to allow ACPI shutdown without login before booting
-    the machine for the first time (?), issue an ACPI shutdown from KVM
-    after some amount of uptime, then edit the resulting network registry
-
-References:
-
-  * <https://answers.microsoft.com/en-us/insider/forum/all/how-to-change-private-network-to-public-network-in/60cd2c6b-0601-489a-ac42-8f1bafed49d3>
-  * <https://www.oueta.com/microsoft/view-network-adapter-info-and-change-mac-address-on-windows-7-8-10/>
