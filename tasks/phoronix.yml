@@ -1,18 +1,18 @@
 - name: /win-phoronix/ fetch phoronix test suite
   win_get_url:
-    dest: "{{ansible_env.TEMP}}\\phoronix-test-suite-{{phoronix_version}}.zip"
+    dest: "{{ ansible_env.TEMP }}\\phoronix-test-suite-{{ phoronix_version }}.zip"
     url: "https://github.com/phoronix-test-suite/phoronix-test-suite/archive/v{{ phoronix_version }}.zip"
 
 - name: /win-phoronix/ unzip phoronix
   win_unzip:
     dest: "{{ ansible_env.SystemDrive }}\\"
-    src: "{{ ansible_env.TEMP }}\\phoronix-test-suite-{{phoronix_version}}.zip"
+    src: "{{ ansible_env.TEMP }}\\phoronix-test-suite-{{ phoronix_version }}.zip"
     creates: "{{ ansible_env.SystemDrive }}\\phoronix-test-suite"
 
 - name: /win-phoronix/ move to version-independent path
   win_shell: \
     Move-Item
-    -Path "{{ ansible_env.SystemDrive }}\\phoronix-test-suite-{{phoronix_version}}"
+    -Path "{{ ansible_env.SystemDrive }}\\phoronix-test-suite-{{ phoronix_version }}"
     -Destination "{{ ansible_env.SystemDrive }}\\phoronix-test-suite"
   args:
     creates: "{{ ansible_env.SystemDrive }}\\phoronix-test-suite"
