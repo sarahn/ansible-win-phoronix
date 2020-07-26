@@ -51,3 +51,9 @@ qemu-system-x86_64 -enable-kvm -smp cpus=2 -m 2048M -net nic -net user,hostfwd=t
   * Click on "network and internet settings"
   * Click on "change connection properties"
   * Select "private" not "public"
+
+### Sample Ansible Inventory
+
+```
+msedge-win10 ansible_user=IEUser ansible_password='Passw0rd!' ansible_connection=winrm ansible_winrm_tranport=basic ansible_host=127.0.0.1 ansible_port=5985
+```
