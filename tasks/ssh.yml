@@ -29,5 +29,5 @@
   win_regedit:
     path: HKLM:\SOFTWARE\OpenSSH
     name: DefaultShell
-    data: 'C:\\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
+    data: '{{ ansible_env.SystemRoot }}\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
     type: string
