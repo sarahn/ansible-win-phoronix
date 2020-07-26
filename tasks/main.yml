@@ -6,6 +6,28 @@
 
 - include: phoronix.yml
 
+- name: /win-phoronix/ test pending reboot
+  win_shell: Test-PendingReboot
+  register: result
+  when: "winphoronix_sysprep is defined and winphoronix_sysprep"
+
+- name: /win-phoronix/ reboot if needed
+  win_shell:
+    Restart-Computer
+  when: "not result.skipped and result.rc != 0"
+
+- name: /win-phoronix/ sysprep system
+  win_shell:
+    "{{ ansible_env.SystemRoot }}\\system32\\Sysprep\\sysprep.exe
+    /generalize
+    /quiet
+    /oobe"
+  when: "winphoronix_sysprep is defined and winphoronix_sysprep"
+#    /unattend:"{{ ansible_env.ProgramW6432}}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\unattend.xml"
+#    /audit
+
 - name: /win-phoronix/ shutdown system
   win_shell: shutdown /s /f
-  when: "winphoronix_shutdown is defined and winphoronix_shutdown"
+  when:
+    (winphoronix_sysprep is defined and winphoronix_sysprep)
+    or (winphoronix_shutdown is defined and winphoronix_shutdown)

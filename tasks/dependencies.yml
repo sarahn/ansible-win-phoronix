@@ -7,6 +7,14 @@
   win_shell: "Set-Item WSMan:\\localhost\\Shell\\MaxMemoryPerShellMB 3096"
   when: '"3096" not in result.stdout'
 
+- name: /win-phoronix/ Install NuGet
+  win_shell:
+    Install-PackageProvider -Force -Name NuGet
+
+- name: /win-phoronix/ Install PendingReboot
+  win_shell:
+    Install-Module -Force -Name PendingReboot
+
 - name: /win-phoronix/ install php
   win_chocolatey:
     name: php

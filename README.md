@@ -12,6 +12,11 @@ This is a role for installing phoronix under windows.
 ## User Configurable variables
 
   * winphoronix_shutdown: set to true to shut down at the end
+  * winphoronix_sysprep: set to true to run sysprep /generalize
+
+References:
+
+  * <https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation>
 
 ## Tags
 
