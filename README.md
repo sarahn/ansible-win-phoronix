@@ -13,6 +13,10 @@ This is a role for installing phoronix under windows.
 
   * winphoronix_shutdown: set to true to shut down at the end
 
+## Tags
+
+  * virtio
+
 ## End to End setup
 
 ### Download/run initial image

@@ -36,3 +36,6 @@
     arguments: "{{ item.args }}"
     path: "{{ ansible_env.TEMP }}\\{{ item.url|basename }}"
   with_items: "{{ winphoronix_msis }}"
+
+- include: virtio.yml
+  tags: virtio
