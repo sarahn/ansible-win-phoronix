@@ -11,7 +11,7 @@ This is a role for installing phoronix under windows.
 
 ## User Configurable variables
 
-  * phoronix_shutdown: set to true to shut down at the end
+  * winphoronix_shutdown: set to true to shut down at the end
 
 ## End to End setup
 
