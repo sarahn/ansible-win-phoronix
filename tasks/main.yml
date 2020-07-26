@@ -1,8 +1,8 @@
+- include: ssh.yml
+
 - include: dependencies.yml
 
 - include: phoronix.yml
-
-- include: ssh.yml
 
 - name: /win-phoronix/ shutdown system
   win_shell: shutdown /s /f
