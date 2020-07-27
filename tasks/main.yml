@@ -6,6 +6,14 @@
 
 - include: phoronix.yml
 
+- name: /win-phoronix/ copy cloudbase-init files
+  win_copy:
+    dest: "{{ ansible_env.ProgramW6432 }}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\{{ item }}"
+    src: "cloudbase-init/{{ item }}"
+  with_items:
+    - cloudbase-init.conf
+    - cloudbase-init-unattend.conf
+
 - name: /win-phoronix/ test pending reboot
   win_shell: Test-PendingReboot
   register: result
@@ -18,13 +26,12 @@
 
 - name: /win-phoronix/ sysprep system
   win_shell:
-    "{{ ansible_env.SystemRoot }}\\system32\\Sysprep\\sysprep.exe
+    '{{ ansible_env.SystemRoot }}\\system32\\Sysprep\\sysprep.exe
     /generalize
     /quiet
-    /oobe"
+    /unattend:"{{ ansible_env.ProgramW6432 }}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\unattend.xml"
+    /oobe'
   when: "winphoronix_sysprep is defined and winphoronix_sysprep"
-#    /unattend:"{{ ansible_env.ProgramW6432}}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\unattend.xml"
-#    /audit
 
 - name: /win-phoronix/ shutdown system
   win_shell: shutdown /s /f
