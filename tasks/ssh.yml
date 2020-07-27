@@ -9,21 +9,24 @@
     enabled: true
     profiles: public,private
 
-- name: /win-phoronix/ start sshd
-  win_service:
-    name: sshd
-    state: started
-    start_mode: auto
-    force: true
-    force_dependent_services: true
+- name: /win-phoronix/ remove custom admin authorized keys
+  win_lineinfile:
+    path: "{{ ansible_env.ALLUSERSPROFILE }}/ssh/sshd_config"
+    regex: "{{ item }}"
+    state: absent
+  with_items:
+    - "Match Group administrators"
+    - "AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys"
+
+- name: /win-phoronix/ create .ssh directory
+  win_file:
+    path: "{{ ansible_env.USERPROFILE }}/.ssh"
+    state: directory
 
 - name: /win-phoronix/ copy authorized_keys
   win_copy:
-    dest: '{{ ansible_env.ALLUSERSPROFILE}}/ssh/administrators_authorized_keys'
+    dest: '{{ ansible_env.USERPROFILE }}/.ssh/authorized_keys'
     src: phoronix.pub
-
-- name: /win-phoronix/ fix authorized_keys permissions
-  script: set-authorized-keys-acl.ps1
 
 - name: /win-phoronix/ use powershell for ssh
   win_regedit:
@@ -31,3 +34,11 @@
     name: DefaultShell
     data: '{{ ansible_env.SystemRoot }}\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
     type: string
+
+- name: /win-phoronix/ start sshd
+  win_service:
+    name: sshd
+    state: started
+    start_mode: auto
+    force: true
+    force_dependent_services: true
