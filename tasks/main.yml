@@ -13,6 +13,14 @@
   win_shell:
     Disable-MMAgent -mc
 
+- name: /win-phoronix/ disable search
+  win_service:
+    name: WSearch
+    state: stopped
+    start_mode: disabled
+    force: true
+    force_dependent_services: true
+
 - name: /win-phoronix/ disable real-time antimalware
   win_shell:
     Set-MpPreference -DisableRealtimeMonitoring $true
