@@ -20,9 +20,8 @@
   when: "winphoronix_sysprep is defined and winphoronix_sysprep"
 
 - name: /win-phoronix/ reboot if needed
-  win_shell:
-    Restart-Computer
-  when: "not result.skipped and result.rc != 0"
+  win_reboot:
+  when: "(not result is skipped) and ('True' in result.stdout)"
 
 - name: /win-phoronix/ sysprep system
   win_shell:
