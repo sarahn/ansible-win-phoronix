@@ -13,6 +13,10 @@
   win_shell:
     Disable-MMAgent -mc
 
+- name: /win-phoronix/ disable real-time antimalware
+  win_shell:
+    Set-MpPreference -DisableRealtimeMonitoring $true
+
 - name: /win-phoronix/ copy cloudbase-init files
   win_copy:
     dest: "{{ ansible_env.ProgramW6432 }}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\{{ item }}"
