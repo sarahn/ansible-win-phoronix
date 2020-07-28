@@ -6,6 +6,9 @@
 
 - include: phoronix.yml
 
+- name: /win-phoronix/ disable automatic updates
+  script: windows-update.ps1 1
+
 - name: /win-phoronix/ copy cloudbase-init files
   win_copy:
     dest: "{{ ansible_env.ProgramW6432 }}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\{{ item }}"
