@@ -9,6 +9,10 @@
 - name: /win-phoronix/ disable automatic updates
   script: windows-update.ps1 1
 
+- name: /win-phoronix/ disable memory compression
+  win_shell:
+    Disable-MMAgent -mc
+
 - name: /win-phoronix/ copy cloudbase-init files
   win_copy:
     dest: "{{ ansible_env.ProgramW6432 }}\\Cloudbase Solutions\\Cloudbase-Init\\conf\\{{ item }}"
