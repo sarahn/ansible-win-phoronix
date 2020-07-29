@@ -33,6 +33,20 @@
     state: present
     params:  "/InstallDir:{{ ansible_env.SystemDrive }}\\cygwin64"
 
+- name: /win-phoronix/ install python2
+  win_chocolatey:
+    name: python2
+    state: present
+    params:  "/InstallDir:{{ ansible_env.SystemDrive }}\\python27"
+
+- name: /win-phoronix/ install python3
+  win_chocolatey:
+    name: python3
+    pinned: true
+    state: present
+    version: "3.7.1"
+    params:  "/InstallDir:{{ ansible_env.USERPROFILE }}\\AppData\\Local\\Programs\\Python\\Python37"
+
 - name: /win-phoronix/ fetch MSIs
   win_get_url:
     dest: "{{ ansible_env.TEMP }}\\{{ item.url|basename }}"
